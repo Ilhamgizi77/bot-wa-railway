@@ -343,3 +343,21 @@ else if (message.body.startsWith('.tfcoin ')) {
 // Run the bot
 createClient();
 
+// Import express module
+const express = require('express');
+
+// Membuat instance dari express
+const app = express();
+
+// Menentukan port aplikasi
+const port = process.env.PORT || 3000;
+
+// Rute utama
+app.get('/', (req, res) => {
+  res.send('Hello World from Express!');
+});
+
+// Menjalankan server di port yang telah ditentukan
+app.listen(port, () => {
+  console.log(`Server berjalan di port ${port}`);
+});
