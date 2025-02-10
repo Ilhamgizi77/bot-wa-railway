@@ -93,8 +93,7 @@ function start(client) {
                          `.restartclient - Restart bot(hanya pemilik bot)\n` +
                          `.math <angka1> <operator> <angka2> - Kalkulator sederhana\n` +
                          `.c / .coinly - Klaim 1 koin per 24 jam\n` +
-                         `.mycoin - Mengecek koin anda saat ini\n` +
-                         `.quiz - Selesaikan 6 pertanyan bayar 30 koin jika salah semua Jika beruntung mendapat 1000 koin!`;
+                         `.mycoin - Mengecek koin anda saat ini`;
         await client.sendText(message.from, menuText);
       }
 
@@ -342,22 +341,3 @@ else if (message.body.startsWith('.tfcoin ')) {
 
 // Run the bot
 createClient();
-
-// Import express module
-const express = require('express');
-
-// Membuat instance dari express
-const app = express();
-
-// Menentukan port aplikasi
-const port = process.env.PORT || 3000;
-
-// Rute utama
-app.get('/', (req, res) => {
-  res.send('Hello World from Express!');
-});
-
-// Menjalankan server di port yang telah ditentukan
-app.listen(port, () => {
-  console.log(`Server berjalan di port ${port}`);
-});
