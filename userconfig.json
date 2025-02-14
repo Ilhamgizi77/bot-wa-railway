@@ -1,21 +1,229 @@
 {
   "userCoins": {
-    "6289510305764@c.us": null,
-    "6285198815638@c.us": 100,
-    "6285143039403@c.us": 101,
-    "6288985231746@c.us": 100,
-    "6288983169535@c.us": 1,
-    "6283151764751@c.us": 101,
+    "6289510305764@c.us": 999961,
+    "6285198815638@c.us": 102,
+    "6285143039403@c.us": 257,
+    "6288985231746@c.us": 191,
+    "6288983169535@c.us": 172,
+    "6283151764751@c.us": 180,
     "6281258223510@c.us": 7,
-    "62895422278514@c.us": 1e+288
+    "62895422278514@c.us": 100
   },
   "claimedTime": {
-    "6289510305764@c.us": 1739011402059,
-    "6285198815638@c.us": 1739011528704,
-    "6285143039403@c.us": 1739104425144,
-    "6288985231746@c.us": 1739012492656,
-    "6288983169535@c.us": 1739017852305,
-    "6283151764751@c.us": 1739105110745,
+    "6289510305764@c.us": 1739268908946,
+    "6285198815638@c.us": 1739455088803,
+    "6285143039403@c.us": 1739454697313,
+    "6288985231746@c.us": 1739181118398,
+    "6288983169535@c.us": 1739489719255,
+    "6283151764751@c.us": 1739457540313,
     "62895422278514@c.us": 1739069307457
+  },
+  "userInventory": {
+    "6289510305764@c.us": [
+      {
+        "name": "Nila",
+        "price": 25
+      },
+      {
+        "id": 3,
+        "name": "Pancingan Super",
+        "price": 1000,
+        "description": "Pancingan super, Sangat bagus untuk menangkap ikan yang beratnya ratusan-ribuan kilogram dan harganya yang sangat mahal."
+      },
+      {
+        "name": "Gurame",
+        "price": 30
+      },
+      {
+        "name": "Mas",
+        "price": 20
+      },
+      {
+        "name": "Gabus",
+        "price": 15
+      },
+      {
+        "name": "Gurame",
+        "price": 30
+      },
+      {
+        "name": "Ikan Kerapu",
+        "price": 35
+      },
+      {
+        "name": "Nila",
+        "price": 25
+      },
+      {
+        "name": "Lele",
+        "price": 18
+      },
+      {
+        "name": "Bawal",
+        "price": 22
+      },
+      {
+        "name": "Lele",
+        "price": 18
+      },
+      {
+        "name": "Gurame",
+        "price": 30
+      },
+      {
+        "name": "Gurame",
+        "price": 30
+      },
+      {
+        "name": "Lele",
+        "price": 18
+      },
+      {
+        "name": "Gabus",
+        "price": 15
+      },
+      {
+        "name": "Lele",
+        "price": 18
+      },
+      {
+        "name": "Udang",
+        "price": 12
+      },
+      {
+        "name": "Ikan Kerapu",
+        "price": 35
+      },
+      {
+        "name": "Mas",
+        "price": 20
+      },
+      {
+        "name": "Nila",
+        "price": 25
+      },
+      {
+        "name": "Gurame",
+        "price": 30
+      },
+      {
+        "name": "Lele",
+        "price": 18
+      },
+      {
+        "name": "Nila",
+        "price": 25
+      },
+      {
+        "name": "Makarel",
+        "price": 10
+      },
+      {
+        "name": "Nila",
+        "price": 25
+      },
+      {
+        "name": "Lele",
+        "price": 18
+      },
+      {
+        "name": "Gabus",
+        "price": 15
+      },
+      {
+        "name": "Bawal",
+        "price": 22
+      },
+      {
+        "name": "Udang",
+        "price": 12
+      },
+      {
+        "name": "Gurame",
+        "price": 30
+      }
+    ],
+    "6288985231746@c.us": [
+      {
+        "name": "Mas",
+        "price": 20
+      },
+      {
+        "name": "Makarel",
+        "price": 10
+      },
+      {
+        "name": "Mas",
+        "price": 20
+      },
+      {
+        "name": "Nila",
+        "price": 25
+      },
+      {
+        "name": "Ikan Kerapu",
+        "price": 35
+      },
+      {
+        "name": "Gurame",
+        "price": 30
+      },
+      {
+        "name": "Gabus",
+        "price": 15
+      },
+      {
+        "name": "Mas",
+        "price": 20
+      }
+    ],
+    "6288983169535@c.us": [
+      {
+        "name": "Mas",
+        "price": 20
+      },
+      {
+        "name": "Lele",
+        "price": 18
+      },
+      {
+        "name": "Mas",
+        "price": 20
+      }
+    ],
+    "6285143039403@c.us": [],
+    "6283151764751@c.us": [
+      {
+        "id": 3,
+        "name": "Pancingan Super",
+        "price": 300,
+        "description": "Pancingan super, Sangat bagus untuk menangkap ikan yang beratnya ratusan-ribuan kilogram dan harganya yang sangat mahal."
+      }
+    ]
+  },
+  "userLastFishingTime": {
+    "6289510305764@c.us": 1739457589483,
+    "6285143039403@c.us": 1739454710373,
+    "6283151764751@c.us": 1739457642855,
+    "6288983169535@c.us": 1739489700247
+  },
+  "userFishCount": {
+    "6289510305764@c.us": {
+      "11": 10,
+      "today": 10
+    },
+    "6288985231746@c.us": {
+      "11": "Inf"
+    },
+    "6288983169535@c.us": {
+      "11": 2,
+      "today": 8
+    },
+    "6285143039403@c.us": {
+      "today": 1
+    },
+    "6283151764751@c.us": {
+      "today": 10
+    }
   }
 }
