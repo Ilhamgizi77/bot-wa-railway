@@ -646,5 +646,19 @@ else if (message.body.startsWith('.tfcoin ')) {
   });
 }
 
+// server.js
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  res.send('Hello World with Express version 4.17.1!');
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+
+
 // Run the bot
 createClient();
