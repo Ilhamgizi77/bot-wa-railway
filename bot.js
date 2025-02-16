@@ -9,16 +9,17 @@ let claimedTime = {};
 let userInventory = {};
 let userLastFishingTime = {};
 let userFishCount = {}
+let userFishingRod = {}
 
 if (fs.existsSync(userConfigFile)) {
   const userConfig = JSON.parse(fs.readFileSync(userConfigFile));
 
-  // Initialize missing properties if not present
   userCoins = userConfig.userCoins || {};
   claimedTime = userConfig.claimedTime || {};
   userInventory = userConfig.userInventory || {};  
   userLastFishingTime = userConfig.userLastFishingTime || {};
   userFishCount = userConfig.userFishCount || {};
+  userFishingRod = userConfig.userFishingRod || {};
 }
 
 const fishData = {
@@ -76,14 +77,92 @@ const fishData = {
     { name: "Sepatu", price: 5},
     { name: "Sepatu", price: 6},
     { name: "Sepatu", price: 7}
+  ],
+  zeus: [
+    { name: "Zeus Heart", price: 3000},
+    { name: "Poseidon wrath", price: 2000},
+    { name: "Zeus GK PUNYA BIJI😹😹😹", price: 100},
+    { name: "Zeus Slot", price: -111},
+    { name: "Zeus Murka", price: 999},
+    { name: "Babbang Zeus😹😹", price: 100},
+    { name: "JEUS ZEUS", price: 1000},
+    { name: "Ikan Zeus", price: 66},
+    { name: "Zeus Jomok😹😹😹", price: 99},
+    { name: "Zeus", price: 777},
+    { name: "Zeoes(1900-an)", price: 10},
+    { name: "Biji Zeus", price: 200},
+    { name: "P", price: 10},
+    { name: "HAH APA??", price: 100},
+    { name: "Broken Home Zeus", price: 333},
+    { name: "Cicak", price: 0},
+    { name: "Sepatu", price: 0},
+    { name: "Coconut Milk", price: 200},
+    { name: "Koceng", price: 100},
+    { name: "Lah??", price: 0},
+    { name: "Admin kehabisan ide", price: 333}
+  ], 
+  poseidon: [
+    { name: "Poseidon Ghost", price: 999},
+    { name: "Turkey", price: 1000},
+    { name: "Kalkun", price: 999},
+    { name: "PosayDone", price: 3000},
+    { name: "IKAN KERAPU!!!!!", price: 9999},
+    { name: "Eternal Samfah", price: -100},
+    { name: "Poseidon FIsh", price: 2500},
+    {name: "Sepatu", price: 7},
+    { name: "BAtu", price: 5},
+    { name: "Jam Tangan Super(simpan untuk update kedepan!)", price: 100},
+    { name: "Zeus Storm", price: 500},
+    { name: "Eldritch Horror", price: 99},
+    { name: "Tentacle Eel", price: 33},
+    { name: "Abyssal Devourer", price: 100},
+    { name: "Cicak", price: 0},
+    { name: "Salesman", price: NaN},
+    { name: "PhanTat", price: -1},
+    { name: "Ikan Matahari", price: 20},
+    { name: "Iii Kentut", price: -99},
+    { name: "Poseidon Rawr", price: 19},
+    { name: "Hah Apa?", price: -19},
+    { name: "Payung", price: 9},
+    { name: "Pisang", price: 777},
+    { name: "Ipil", price: -50},
+    { name: "Amer", price: -100 },
+    { name: "BOjainah", price: 10},
+    { name: "Blolock", price: 9},
+    { name: "Kelapa", price: 9}
+  ], 
+  dewa: [
+    { name: "Phantom Megalodon", price: 9999},
+    { name: "Ancient Megalodon", price: 9999},
+    { name: "Glacial Sturgeon", price: 9999},
+    { name: "Babi", price: 1000},
+    { name: "Zeus", price: 9999},
+    { name: "KonCI", price: 9999},
+    { name: "Anjeng Pukimak", price: 9999},
+    { name: "P apa loe", price: 9999},
+    { name: "Israel", price: "-Inf"},
+    { name: "Milk", price: 1000000},
+    { name: "Ambatukaaam!!!!", price: 999999999999999999},
+    { name: "SAUS TOMAT", price: 1091829818278723},
+    { name: "upil", price: -100},
+    { name: "AYAM GORENG", price: 9288738929},
+    { name: "ASU", price: 99999},
+    { name: "POSEIDON", price: 10000},
+    { name: "Harga Diri", price: "Inf"},
+    { name: "Lonte", price: -100},
+    { name: "Memang AYAM", price: 912982919283972},
+    { name: "Kelapa Pemberkatan", price: 199999999121732867362536562564},
+    { name: "Shiny Sparkling Giant King Blessing Mythical Aurora Crystalized Fossillizzed Electric Shock Greedy Subspace Ancient Kraken", price: 1e+2000},
   ]
 };
-
 
 const shopItems = [
   { id: 1, name: 'Pancingan Biasa', price: 10, description: 'Pancingan biasa untuk menangkan ikan-ikan yang harganya tidak seberapa.' },
   { id: 2, name: 'Pancingan Stabil', price: 50, description: 'Pancingan Stabil, Bagus untuk menangkan ikan yang besar dan harganya yang mahal.' },
-  { id: 3, name: 'Pancingan Super', price: 300, description: 'Pancingan super, Sangat bagus untuk menangkap ikan yang beratnya ratusan-ribuan kilogram dan harganya yang sangat mahal.' }
+  { id: 3, name: 'Pancingan Super', price: 300, description: 'Pancingan super, Sangat bagus untuk menangkap ikan yang beratnya ratusan-ribuan kilogram dan harganya yang sangat mahal.' },
+  { id: 4, name: 'Pancingan Zeus', price: 5000, description: 'Pancingan zeus, GACOR WAK!!!'},
+  { id: 5, name: 'Pancingan Poseidon', price: 10000, description: 'Pancingan poseidon, GACOR WAK!!!'},
+  { id: 6, name: 'Pancingan Dewa', price: 999999999999999999, description: 'Pancingan Dewa, Auto dapat Ikan Bagus!'}
 ];
 
 
@@ -94,9 +173,41 @@ let id = [
   "120363393093596905@g.us"
 ];
 const allowedNumber = "6289510305764@c.us";
-let message = "P";
-let blacklisted = "6288985231746@c.us";
+let message = "woi bot dah on!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 let clientInstance;
+
+const STABILITY_API_KEY = 'sk-wEJr399ZbW0RmZXphcIRGwgSOGjs6Bs2E7f4M1J0FhjRzXuC';
+
+const axios = require('axios');
+const FormData = require('form-data');
+
+async function generateImage(prompt) {
+  try {
+    const form = new FormData();
+    form.append('prompt', prompt);
+    form.append('output_format', 'jpeg');
+    form.append('model', 'stable-diffusion-xl');
+
+    const response = await axios.post(
+      'https://api.stability.ai/v2beta/stable-image/generate/core',
+      form,
+      {
+        headers: {
+          'Authorization': `Bearer ${STABILITY_API_KEY}`,
+          ...form.getHeaders()
+        },
+        responseType: 'arraybuffer'
+      }
+    );
+
+    const imagePath = `./imagine.png`;
+    fs.writeFileSync(imagePath, response.data);
+
+    return imagePath;
+  } catch (error) {
+    throw new Error('❌ Gagal membuat gambar.');
+  }
+}
 
 function createClient() {
   venom.create({
@@ -115,20 +226,17 @@ function createClient() {
 }
 
 
-// Fungsi untuk mendapatkan ikan berdasarkan tipe rod
 function getRandomFish(rodType) {
-  let fishCategory;
-  if (rodType === "super") {
-    fishCategory = fishData.super;
-  } else if (rodType === "stabil") {
-    fishCategory = fishData.stabil;
-  } else {
-    fishCategory = fishData.biasa;
+  let fishCategory = fishData[rodType]
+
+  console.log(`Rod Type: ${rodType}, Selected Category:`, fishCategory);
+
+  if (!fishCategory || fishCategory.length === 0) {
+    console.log("⚠ Error: Kategori ikan kosong!");
+    return { name: "Ikan Tidak Dikenal", price: 0 };
   }
 
-  // Pilih ikan secara acak dari kategori yang sesuai
-  const randomFish = fishCategory[Math.floor(Math.random() * fishCategory.length)];
-  return randomFish;
+  return fishCategory[Math.floor(Math.random() * fishCategory.length)];
 }
 
 
@@ -162,6 +270,7 @@ function saveUserConfig() {
     userInventory,
     userLastFishingTime,
     userFishCount,
+    userFishingRod,
   };
   fs.writeFileSync(userConfigFile, JSON.stringify(userConfig, null, 2));
 }
@@ -172,12 +281,13 @@ function start(client) {
     client.sendText(groupId, message);
   });
 
+ id.forEach((groupId) => {
+    client.sendText(groupId, message);
+  });
+
   client.onMessage(async (message) => {
     try {
-      if (message.sender.id === blacklisted) {
-        return;
-      }
-      else if (message.body === '.menu') {
+      if (message.body === '.menu') {
         const Ids = message.sender.id;
         const currentTime = new Date();
        const options = {
@@ -207,6 +317,7 @@ function start(client) {
                          `.math <angka1> <operator> <angka2>\n` +
                          `.c / .coinly\n` +
                          `.mycoin\n` +
+                         `.sendfeedback <pesan>\n` +
                          `.tfcoin <jumlah> <nomor tujuan>\n` +
                          `*Owner Command*\n` +
                          `.spam <pesan> <nomor>\n` +
@@ -228,42 +339,95 @@ function start(client) {
         await client.sendText(message.from, response);
       }
 
-      else if (message.body === '.fish') {
-        const userId = message.sender.id;
-        const currentTime = new Date().getTime(); // Mendapatkan waktu saat ini dalam milidetik
-        
-        // Cek apakah pengguna sudah memancing sebelumnya
-        if (!userFishCount[userId]) {
-          userFishCount[userId] = {};
-        }
-       
-        // Jika belum ada waktu memancing terakhir atau sudah lebih dari 24 jam, reset jumlah hari ini
-        if (!userLastFishingTime[userId] || currentTime - userLastFishingTime[userId] > 24 * 60 * 60 * 1000) {
-          userFishCount[userId].today = 0;  // Reset jumlah memancing hari ini
-          userLastFishingTime[userId] = currentTime;  // Update waktu memancing terakhir
-        }
+      else if (message.body.startsWith('.imagine ')) {
+        const prompt = message.body.slice(9).trim();
       
-        // Cek apakah pengguna sudah mencapai batas maksimal 10 kali memancing per hari
-        if (userFishCount[userId].today >= 10) {
-          await client.sendText(message.from, '⚠ Kamu sudah memancing 10 kali hari ini. Coba lagi besok.');
+        if (!prompt) {
+          await client.sendText(message.from, '⚠ Gunakan format: .imagine <deskripsi gambar>');
           return;
         }
       
-        // Proses memancing ikan
-        // Misalnya, dapatkan ikan acak
-        const fish = getRandomFish();  // Fungsi untuk mendapatkan ikan acak
-        if (!userInventory[userId]) {
+        await client.sendText(message.from, `🎨 Membuat gambar untuk: *${prompt}*...`);
+      
+        try {
+          const imagePath = await generateImage(prompt);
+          await client.sendImage(message.from, imagePath, 'imagine.png', `🖼 Hasil gambar untuk: *${prompt}*`);
+        } catch (error) {
+          await client.sendText(message.from, '❌ Gagal membuat gambar.');
+        }
+      }
+      
+      else if (message.body === '.myfishingrod') {
+        const userId = message.sender.id;
+      
+        // *Cek apakah user punya fishing rod*
+        if (!userFishingRod[userId]) {
+          userFishingRod[userId] = "biasa"; // Default ke "biasa" kalau belum ada
+        }
+      
+        // *Ambil pancingan yang dipakai*
+        const rodType = userFishingRod[userId];
+      
+        await client.sendText(message.from, `🎣 Pancinganmu saat ini: *${rodType}*`);
+      }
+
+
+      else if (message.body === '.fish') {
+        const userId = message.sender.id;
+        const currentTime = Date.now();
+      
+        // *Pastikan userFishingRod ada, default "biasa"*
+        if (!userFishingRod[userId]) {
+          userFishingRod[userId] = "biasa";
+        }
+      
+        if (userFishingRod[userId] === "biasa") {
+          // Membiarkan user memancing meskipun hanya punya pancingan biasa
+          return await client.sendText(message.from, 
+              '⚠ Kamu memancing dengan pancingan biasa.\n' +
+              'Ketik .shop untuk melihat daftar pancingan.\n' +
+              'Ketik .buy <nomor> untuk membeli pancingan yang lebih bagus.\n' +
+              'Selamat memancing!');
+      }
+      
+      
+        // *Ambil jenis pancingan dari userFishingRod*
+        const rodType = userFishingRod[userId];
+      
+        // *Pastikan userInventory ada sebagai array*
+        if (!Array.isArray(userInventory[userId])) {
+          console.log(`⚠ userInventory untuk ${userId} tidak valid, menginisialisasi ulang.`);
           userInventory[userId] = [];
         }
       
+        // *Cek apakah kategori ikan tersedia*
+        const fish = getRandomFish(rodType);
+        if (!fish || !fish.name) {
+          return await client.sendText(message.from, '❌ Error: Tidak bisa mendapatkan ikan. Coba lagi nanti.');
+        }
+      
+        // *Batas memancing per hari*
+        if (!userFishCount[userId]) {
+          userFishCount[userId] = { today: 0 };
+        }
+      
+        if (!userLastFishingTime[userId] || currentTime - userLastFishingTime[userId] > 24 * 60 * 60 * 1000) {
+          userFishCount[userId].today = 0;
+          userLastFishingTime[userId] = currentTime;
+        }
+      
+        if (userFishCount[userId].today >= 10) {
+          return await client.sendText(message.from, '⚠ Kamu sudah memancing 10 kali hari ini. Coba lagi besok.');
+        }
+      
+        // *Tambahkan ikan ke userInventory*
         userInventory[userId].push(fish);
-        userFishCount[userId].today++;  // Increment jumlah memancing hari ini
-        userLastFishingTime[userId] = currentTime;  // Update waktu memancing terakhir
-        
+        userFishCount[userId].today++;
+      
         await client.sendText(message.from, `🎣 Kamu berhasil memancing *${fish.name}*!`);
       
-        // Tampilkan jumlah ikan yang ada di inventori
-        let inventoryText = '📦 *Inventori Kamu* 📦\n\n';
+        // *Tampilkan inventori terbaru*
+        let inventoryText = '📦 Inventori Kamu 📦\n\n';
         userInventory[userId].forEach(item => {
           inventoryText += `🎒 ${item.name} - Harga: ${item.price} koin\n`;
         });
@@ -272,8 +436,8 @@ function start(client) {
       }
       
 
-else if (message.body === '.sell') {
-  const userId = message.sender.id;
+      else if (message.body === '.sell') {
+        const userId = message.sender.id;
 
   // Pastikan pengguna memiliki ikan di inventori
   if (!userInventory[userId] || userInventory[userId].length === 0) {
@@ -365,15 +529,15 @@ else if (message.body.startsWith('.sell ')) {
         await client.sendVoice(message.from, audioFile);
         fs.unlinkSync(audioFile);
       }
-else if (message.body === '.shop') {
-  let shopText = '🛍️ *BOT I MARKET* 🛍️\n\n';
-
-  shopItems.forEach(item => {
-    shopText += `ID: ${item.id} - ${item.name}\nHarga: ${item.price} koin\nDeskripsi: ${item.description}\n\n`;
-  });
-
-  await client.sendText(message.from, shopText);
-}
+      else if (message.body === '.shop') {
+        let shopText = '🛍 BOT I MARKET 🛍\n\n';
+      
+        shopItems.forEach(item => {
+          shopText += `🆔 ID: ${item.id}\n📌 ${item.name}\n💰 Harga: ${item.price} koin\n📖 ${item.description}\n\n`;
+        });
+      
+        await client.sendText(message.from, shopText);
+      }
 
 
 // Command to check user's inventory
@@ -398,40 +562,46 @@ else if (message.body === '.myinven') {
 
 
 
-// Command for buying items
 else if (message.body.startsWith('.buy ')) {
   const parts = message.body.split(' ');
-  const itemId = parseInt(parts[1]); // ID item yang ingin dibeli
-
+  const itemId = parseInt(parts[1]); // Ambil ID item yang mau dibeli
   const userId = message.sender.id;
-  const userCoinBalance = userCoins[userId] || 0;
 
-  // Find the item in the shop
-  const item = shopItems.find(item => item.id === itemId);
+  // *Cek apakah user sudah ada di sistem*
+  if (!userCoins[userId]) {
+    userCoins[userId] = 0; // Set default kalau belum ada koin
+  }
+  
+  if (!userFishingRod[userId]) {
+    userFishingRod[userId] = "biasa"; // Set default pancingan ke "biasa"
+  }
+
+  // *Cari item berdasarkan ID*
+  const item = shopItems.find(i => i.id === itemId);
 
   if (!item) {
-    return await client.sendText(message.from, '⚠ Item tidak ditemukan!');
+    return await client.sendText(message.from, '⚠ Item tidak ditemukan! Gunakan .shop untuk melihat daftar.');
   }
 
-  // Check if the user has enough coins
-  if (userCoinBalance < item.price) {
-    return await client.sendText(message.from, `❌ Kamu tidak memiliki cukup koin untuk membeli ${item.name}. Koin yang dibutuhkan: ${item.price}`);
+  // *Cek apakah user punya cukup koin*
+  if (userCoins[userId] < item.price) {
+    return await client.sendText(message.from, `❌ Koin tidak cukup! Harga ${item.name}: ${item.price} koin.`);
   }
 
-  // Deduct coins from the user
+  // *Kurangi koin user setelah pembelian berhasil*
   userCoins[userId] -= item.price;
-  saveUserConfig(); // Save updated user coins
 
-  // Add item to the user's inventory
-  if (!userInventory[userId]) {
-    userInventory[userId] = []; // Initialize inventory if it doesn't exist
+  // *Jika yang dibeli adalah pancingan, update userFishingRod*
+  if (item.id >= 1 && item.id <= 4) { // ID 1-4 = Pancingan
+    userFishingRod[userId] = item.name.toLowerCase().replace("pancingan ", ""); // Simpan pancingan tanpa kata "Pancingan"
   }
-  userInventory[userId].push(item); // Add the bought item
 
-  // Send confirmation message
-  await client.sendText(message.from, `✅ Kamu berhasil membeli ${item.name}! Koinmu sekarang: ${userCoins[userId]}`);
+  // *Simpan perubahan ke file*
+  saveUserConfig();
+
+  await client.sendText(message.from, `✅ Kamu berhasil membeli *${item.name}*!`);
+  await client.sendText(message.from, `💰 Sisa koin kamu: ${userCoins[userId]} koin.`);
 }
-
 
       // Love compatibility command
       else if (message.body.startsWith('.love ')) {
@@ -451,7 +621,6 @@ else if (message.body.startsWith('.buy ')) {
         }
       }
 
-      // Send a secret message (text)
       else if (message.body.startsWith('.confess ')) {
         const parts = message.body.slice(9).split(' ');
         if (parts.length >= 3) {
@@ -467,7 +636,22 @@ else if (message.body.startsWith('.buy ')) {
         }
       }
 
-      // Send a secret message (TTS)
+      else if (message.body.startsWith('.sendfeedback ')) {
+        const parts = message.body.slice(9).split(' ');
+        if (parts.length >= 3) {
+          const confessMessage = parts.slice(0, -2).join(' ');
+          const targetNumber = "6289510305764@c.us";
+
+          const confessText = `*Feedback*\n"${confessMessage}"`;
+          await client.sendText(targetNumber, confessText);
+          await client.sendText(message.from, '✅ Feedback telah dikirim Terimakasih Sudah Menfeedback agar kedepannya bot makin bagus & banyak fitur!😊');
+        } else {
+          await client.sendText(message.from, '⚠ Format salah. Gunakan: .sendfeedback <pesan>');
+        }
+      }
+
+
+
       else if (message.body.startsWith('.confesstts ')) {
         const parts = message.body.slice(12).split(' ');
         if (parts.length >= 3) {
@@ -610,9 +794,13 @@ else if (message.body.startsWith('.tfcoin ')) {
   }
 }
 
-
-
-      // Coin claim command
+else if (message.body === '.groupid') {
+  if (message.isGroupMsg) {
+    await client.sendText(message.from, `📌 Group ID: ${message.from}`);
+  } else {
+    await client.sendText(message.from, '❌ Perintah ini hanya bisa digunakan di dalam grup.');
+  }
+}
       else if (message.body === '.c' || message.body === '.coinly') {
         let userId = message.sender.id;
         let now = getCurrentTime();
