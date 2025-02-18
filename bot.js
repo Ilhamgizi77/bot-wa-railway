@@ -10,6 +10,7 @@ let userInventory = {};
 let userLastFishingTime = {};
 let userFishCount = {}
 let userFishingRod = {}
+let userBait = {}
 
 if (fs.existsSync(userConfigFile)) {
   const userConfig = JSON.parse(fs.readFileSync(userConfigFile));
@@ -20,6 +21,7 @@ if (fs.existsSync(userConfigFile)) {
   userLastFishingTime = userConfig.userLastFishingTime || {};
   userFishCount = userConfig.userFishCount || {};
   userFishingRod = userConfig.userFishingRod || {};
+  userBait = userConfig.userBait || {};
 }
 
 const fishData = {
@@ -109,7 +111,7 @@ const fishData = {
     { name: "IKAN KERAPU!!!!!", price: 9999},
     { name: "Eternal Samfah", price: -100},
     { name: "Poseidon FIsh", price: 2500},
-    {name: "Sepatu", price: 7},
+    { name: "Sepatu", price: 7},
     { name: "BAtu", price: 5},
     { name: "Jam Tangan Super(simpan untuk update kedepan!)", price: 100},
     { name: "Zeus Storm", price: 500},
@@ -131,6 +133,54 @@ const fishData = {
     { name: "Blolock", price: 9},
     { name: "Kelapa", price: 9}
   ], 
+  aurora: [
+    { name: "Aurora Pemberkatan", price: 20000 },
+    { name: "Kelapa Pemberkatan(lite)", price: 9999 },
+    { name: "Jam Tangan Pemberkatan(lite)", price: 8800 },
+    { name: "Muahal rek", price: 9999 },
+    { name: "ayam gorang", price: 100 },
+    { name: "Shiny Sparkling Giant Aurora Phantom Megalodon", price: 25000 },
+    { name: "mUANI", price: -1999 },
+    { name: "Aurora Totem", price: 500 },
+    { name: "HALO REK", price: 200 },
+    { name: "Aurora Pemberkatan(lite)", price: 2000 },
+    { name: "Aurora Megalodon", price: 10000 },
+    { name: "Aurora Kraken", price: 10000 },
+    { name: "Aurora Trout", price: 1000 },
+    { name: "Aurora Aurora trout", price: 7000 },
+    { name: "Aurora Long Pike", price: 1000 },
+    { name: "Aurora banana", price: 1000 },
+    { name: "Aurora sailfish", price: 1000 },
+    { name: "Aurora zeus", price: 1000 },
+    { name: "Aurora treble bass", price: 1000 },
+    { name: "Aurora pike", price: 1000 },
+    { name: "Aurora Orca", price: 10000 },
+    { name: "Aurora Ashcloud archerfish", price: 1000 },
+    { name: "Aurora Kelapa Pemberkatan", price: 99999 },
+    { name: "Aurora f", price: 7000 },
+    { name: "Aurora e", price: 5000 },
+    { name: "Aurora d", price: 4000 },
+    { name: "Aurora c", price: 2000 },
+    { name: "Aurora b", price: 1000 },
+    { name: "Aurora a", price: 400 },
+    { name: "Aurora NORTHSTAR SERPENTE", price: 10000 },
+    { name: "Aurora cuch", price: 600 },
+    { name: "Aurora fish", price: 1000 },
+    { name: "Aurora catch", price: 1000 },
+    { name: "Aurora luck", price: 700 },
+    { name: "Aurora rock", price: 1000 },
+    { name: "Aurora Umbrella", price: 900 },
+    { name: "Aurora Glacial Sturgeon", price: 5000 },
+    { name: "Kehabisan ide", price: 600 },
+    { name: "loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong piiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiike", price: 3000 },
+    { name: "kunci", price: 100 },
+    { name: "ayam pemberkatan", price: 5000 },
+    { name: "tuna pemberkatan", price: 10000 },
+    { name: "CUYY", price: 200 },
+    { name: "Payah", price: 2300 },
+    { name: "Gurame", price: 10000 },
+    { name: "GARENA API GRATIS MENGAMUK", price: 1000 }
+  ],
   dewa: [
     { name: "Phantom Megalodon", price: 9999},
     { name: "Ancient Megalodon", price: 9999},
@@ -149,6 +199,7 @@ const fishData = {
     { name: "ASU", price: 99999},
     { name: "POSEIDON", price: 10000},
     { name: "Harga Diri", price: "Inf"},
+    { name: "Jam Tangan Pemberkatan", price: 98978738289783238728782393209},
     { name: "Lonte", price: -100},
     { name: "Memang AYAM", price: 912982919283972},
     { name: "Kelapa Pemberkatan", price: 199999999121732867362536562564},
@@ -156,21 +207,23 @@ const fishData = {
   ]
 };
 
+const shopText = "Halo!\nKamu Mau Beli Apaan Nih?\nKetik .rodShop untuk liat Pancingan apa yg dijual😁\nNanti Kedepannya Update Lagi Jadi Lebih Banyak Barang Jualannya!"
+
 const shopItems = [
   { id: 1, name: 'Pancingan Biasa', price: 10, description: 'Pancingan biasa untuk menangkan ikan-ikan yang harganya tidak seberapa.' },
   { id: 2, name: 'Pancingan Stabil', price: 50, description: 'Pancingan Stabil, Bagus untuk menangkan ikan yang besar dan harganya yang mahal.' },
   { id: 3, name: 'Pancingan Super', price: 300, description: 'Pancingan super, Sangat bagus untuk menangkap ikan yang beratnya ratusan-ribuan kilogram dan harganya yang sangat mahal.' },
   { id: 4, name: 'Pancingan Zeus', price: 5000, description: 'Pancingan zeus, GACOR WAK!!!'},
   { id: 5, name: 'Pancingan Poseidon', price: 10000, description: 'Pancingan poseidon, GACOR WAK!!!'},
-  { id: 6, name: 'Pancingan Dewa', price: 999999999999999999, description: 'Pancingan Dewa, Auto dapat Ikan Bagus!'}
+  { id: 6, name: 'Pancingan Aurora', price: 50000, description: 'Pancingan Aurora, sangat bagus apalagi ketika lagi aurora'},
+  { id: 7, name: 'Pancingan Dewa', price: 999999999999999999, description: 'Pancingan Dewa, Auto dapat Ikan Bagus!'}
 ];
 
-
-// Group and allowed number settings
 let id = [
   "120363374625480499@g.us",
   "120363357573486906@g.us",
-  "120363393093596905@g.us"
+  "120363393093596905@g.us",
+  "120363384388628693@g.us"
 ];
 const allowedNumber = "6289510305764@c.us";
 let message = "woi bot dah on!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
@@ -180,6 +233,7 @@ const STABILITY_API_KEY = 'sk-wEJr399ZbW0RmZXphcIRGwgSOGjs6Bs2E7f4M1J0FhjRzXuC';
 
 const axios = require('axios');
 const FormData = require('form-data');
+const { parseArgs } = require('util');
 
 async function generateImage(prompt) {
   try {
@@ -271,20 +325,13 @@ function saveUserConfig() {
     userLastFishingTime,
     userFishCount,
     userFishingRod,
+    userBait,
   };
   fs.writeFileSync(userConfigFile, JSON.stringify(userConfig, null, 2));
 }
 
 
 function start(client) {
-  id.forEach((groupId) => {
-    client.sendText(groupId, message);
-  });
-
- id.forEach((groupId) => {
-    client.sendText(groupId, message);
-  });
-
   client.onMessage(async (message) => {
     try {
       if (message.body === '.menu') {
@@ -321,7 +368,8 @@ function start(client) {
                          `.tfcoin <jumlah> <nomor tujuan>\n` +
                          `*Owner Command*\n` +
                          `.spam <pesan> <nomor>\n` +
-                         `.restartclient\n`;
+                         `.restartclient\n` +
+                         `.deductcoins <nomor>`;
         await client.sendText(message.from, menuText);
       }
       // Restart client command
@@ -333,7 +381,32 @@ function start(client) {
         restartClient();
       }
 
-      // Repeat message command
+      else if (message.body.startsWith('.resetfishingtime ')) {
+        const userId = message.sender.id;
+        if (userId !== allowedNumber) {
+          return await client.sendText(message.from, '❌ Kamu tidak memiliki izin untuk menggunakan perintah ini.');
+        }
+        const args = message.body.split(' ');
+        if (args.length < 2) {
+          return await client.sendText(message.from, '⚠ Format salah! Gunakan: .resetfishingtime <nomor tujuan>');
+        }
+      
+        let targetNumber = args[1] + '@c.us'; 
+        if (!userLastFishingTime[targetNumber]) {
+          return await client.sendText(message.from, `⚠ Pengguna ${args[1]} tidak ditemukan atau belum memancing.`);
+        }
+      
+        delete userLastFishingTime[targetNumber]; 
+        delete userFishCount[targetNumber]; 
+      
+
+        saveUserConfig();
+      
+        await client.sendText(message.from, `✅ Data fishing time untuk *${args[1]}* telah direset!`);
+        await client.sendText(targetNumber, '🔄 Data fishing time kamu telah direset oleh admin.');
+      }
+      
+      
       else if (message.body.startsWith('.says ')) {
         const response = message.body.slice(6);
         await client.sendText(message.from, response);
@@ -359,13 +432,10 @@ function start(client) {
       
       else if (message.body === '.myfishingrod') {
         const userId = message.sender.id;
-      
-        // *Cek apakah user punya fishing rod*
         if (!userFishingRod[userId]) {
-          userFishingRod[userId] = "biasa"; // Default ke "biasa" kalau belum ada
+          userFishingRod[userId] = "biasa"; 
         }
       
-        // *Ambil pancingan yang dipakai*
         const rodType = userFishingRod[userId];
       
         await client.sendText(message.from, `🎣 Pancinganmu saat ini: *${rodType}*`);
@@ -375,66 +445,110 @@ function start(client) {
       else if (message.body === '.fish') {
         const userId = message.sender.id;
         const currentTime = Date.now();
-      
+    
         // *Pastikan userFishingRod ada, default "biasa"*
         if (!userFishingRod[userId]) {
-          userFishingRod[userId] = "biasa";
+            userFishingRod[userId] = "biasa";
         }
-      
+    
         if (userFishingRod[userId] === "biasa") {
-          // Membiarkan user memancing meskipun hanya punya pancingan biasa
-          return await client.sendText(message.from, 
-              '⚠ Kamu memancing dengan pancingan biasa.\n' +
-              'Ketik .shop untuk melihat daftar pancingan.\n' +
-              'Ketik .buy <nomor> untuk membeli pancingan yang lebih bagus.\n' +
-              'Selamat memancing!');
-      }
-      
-      
+            // Membiarkan user memancing meskipun hanya punya pancingan biasa
+            return await client.sendText(message.from, 
+                '⚠ Kamu memancing dengan pancingan biasa.\n' +
+                'Ketik .shop untuk melihat daftar pancingan.\n' +
+                'Ketik .buy <nomor> untuk membeli pancingan yang lebih bagus.\n' +
+                'Selamat memancing!');
+        }
+    
         // *Ambil jenis pancingan dari userFishingRod*
         const rodType = userFishingRod[userId];
-      
+    
         // *Pastikan userInventory ada sebagai array*
         if (!Array.isArray(userInventory[userId])) {
-          console.log(`⚠ userInventory untuk ${userId} tidak valid, menginisialisasi ulang.`);
-          userInventory[userId] = [];
+            console.log(`⚠ userInventory untuk ${userId} tidak valid, menginisialisasi ulang.`);
+            userInventory[userId] = [];
         }
-      
+    
         // *Cek apakah kategori ikan tersedia*
         const fish = getRandomFish(rodType);
         if (!fish || !fish.name) {
-          return await client.sendText(message.from, '❌ Error: Tidak bisa mendapatkan ikan. Coba lagi nanti.');
+            return await client.sendText(message.from, '❌ Error: Tidak bisa mendapatkan ikan. Coba lagi nanti.');
         }
-      
+    
         // *Batas memancing per hari*
         if (!userFishCount[userId]) {
-          userFishCount[userId] = { today: 0 };
+            userFishCount[userId] = { today: 0 };
         }
-      
+    
+        // Cek apakah user termasuk dalam daftar allowedNumber
+        const isAllowed = allowedNumber.includes(userId); // Cek apakah userId ada di dalam array allowedNumber
+    
         if (!userLastFishingTime[userId] || currentTime - userLastFishingTime[userId] > 24 * 60 * 60 * 1000) {
-          userFishCount[userId].today = 0;
-          userLastFishingTime[userId] = currentTime;
+            userFishCount[userId].today = 0;
+            userLastFishingTime[userId] = currentTime;
         }
-      
-        if (userFishCount[userId].today >= 10) {
-          return await client.sendText(message.from, '⚠ Kamu sudah memancing 10 kali hari ini. Coba lagi besok.');
+    
+        // Jika user bukan bagian dari allowedNumber dan sudah mencapai batas 10 kali memancing, beri peringatan
+        if (userFishCount[userId].today >= 10 && !isAllowed) {
+            return await client.sendText(message.from, '⚠ Kamu sudah memancing 10 kali hari ini. Coba lagi besok.');
         }
-      
+    
         // *Tambahkan ikan ke userInventory*
         userInventory[userId].push(fish);
         userFishCount[userId].today++;
-      
+    
         await client.sendText(message.from, `🎣 Kamu berhasil memancing *${fish.name}*!`);
-      
+    
         // *Tampilkan inventori terbaru*
         let inventoryText = '📦 Inventori Kamu 📦\n\n';
         userInventory[userId].forEach(item => {
-          inventoryText += `🎒 ${item.name} - Harga: ${item.price} koin\n`;
+            inventoryText += `🎒 ${item.name} - Harga: ${item.price} koin\n`;
         });
-      
+    
         await client.sendText(message.from, inventoryText);
+    }
+
+    else if (message.body.startsWith('.deductcoins')) {
+      const args = message.body.split(' '); 
+      const userId = message.sender.id;
+
+      const ownerId = allowedNumber;  
+
+      if (userId !== ownerId) {
+          return await client.sendText(message.from, '❌ Kamu tidak memiliki izin untuk menggunakan perintah ini.');
       }
-      
+
+      if (args.length < 3) {
+          return await client.sendText(message.from, '❌ Format salah. Gunakan: .deductcoins <jumlah> <nomor tujuan>');
+      }
+  
+      const amount = parseInt(args[1]); 
+      let targetUserId = args[2]; 
+
+      targetUserId = targetUserId + "@c.us"; 
+      if (isNaN(amount) || amount <= 0) {
+          return await client.sendText(message.from, '❌ Jumlah koin tidak valid.');
+      }
+
+      if (!userCoins[targetUserId]) {
+          return await client.sendText(message.from, `❌ User dengan ID ${targetUserId} tidak ditemukan.`);
+      }
+  
+      if (userCoins[targetUserId] < amount) {
+          return await client.sendText(message.from, '❌ Target tidak memiliki cukup koin.');
+      }
+      userCoins[targetUserId] -= amount;
+      saveUserConfig();
+  
+      await client.sendText(message.from, `✅ Kamu berhasil mengurangi *${amount} koin* dari *${targetUserId}*.`);
+  
+      await client.sendText(targetUserId, `⚠ *${amount} koin* telah dikurangi dari saldo kamu oleh *${userId}*.`);
+  
+      let targetBalance = userCoins[targetUserId];
+      await client.sendText(targetUserId, `💰 Saldo koin terkini kamu: *${targetBalance} koin*`);
+  }
+  
+  
 
       else if (message.body === '.sell') {
         const userId = message.sender.id;
@@ -445,28 +559,23 @@ function start(client) {
     return;
   }
 
-  // Daftar ikan yang ada di inventori untuk dijual
   let fishListText = '🐟 *Ikan yang bisa dijual:* 🐟\n\n';
   userInventory[userId].forEach((item, index) => {
     fishListText += `${index + 1}. ${item.name} - Harga: ${item.price} koin\n`;
   });
 
-  // Minta pengguna memilih ikan untuk dijual
   fishListText += '\nKetik nomor ikan yang ingin dijual (misalnya: .sell 1)';
   await client.sendText(message.from, fishListText);
 }
 
-// Periksa jika pengguna memilih ikan dengan mengetik .sell <nomor>
 if (message.body === '.sell') {
   const userId = message.sender.id;
 
-  // Pastikan pengguna memiliki ikan di inventori
   if (!userInventory[userId] || userInventory[userId].length === 0) {
     await client.sendText(message.from, '⚠ Kamu tidak memiliki ikan untuk dijual. Mulailah dengan memancing ikan menggunakan perintah .fish.');
     return;
   }
 
-  // Daftar ikan yang ada di inventori untuk dijual
   let fishListText = '🐟 *Ikan yang bisa dijual:* 🐟\n\n';
   userInventory[userId].forEach((item, index) => {
     fishListText += `${index + 1}. ${item.name} - Harga: ${item.price} koin\n`;
@@ -530,7 +639,7 @@ else if (message.body.startsWith('.sell ')) {
         fs.unlinkSync(audioFile);
       }
       else if (message.body === '.shop') {
-        let shopText = '🛍 BOT I MARKET 🛍\n\n';
+        let shopText = '🛍 BOT I SHOP 🛍\n\n';
       
         shopItems.forEach(item => {
           shopText += `🆔 ID: ${item.id}\n📌 ${item.name}\n💰 Harga: ${item.price} koin\n📖 ${item.description}\n\n`;
@@ -637,8 +746,8 @@ else if (message.body.startsWith('.buy ')) {
       }
 
       else if (message.body.startsWith('.sendfeedback ')) {
-        const parts = message.body.slice(9).split(' ');
-        if (parts.length >= 3) {
+        const parts = message.body.slice(15);
+        if (parts.length <= 3) {
           const confessMessage = parts.slice(0, -2).join(' ');
           const targetNumber = "6289510305764@c.us";
 
@@ -707,13 +816,10 @@ else if (message.body.startsWith('.math ')) {
     let result;
     let isValid = true;
 
-    // Check if the numbers are valid
     if (isNaN(number1) || isNaN(number2)) {
       isValid = false;
       result = '⚠ Input invalid. Pastikan kedua nilai adalah angka.';
     }
-
-    // Perform the operation based on the operator
     if (isValid) {
       switch (operator) {
         case '+':
